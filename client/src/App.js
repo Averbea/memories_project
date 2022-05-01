@@ -10,6 +10,7 @@ import useStyles from './styles'
 
 
 export default function App() {
+  const [currentId, setCurrentId] = React.useState(null)
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -26,12 +27,12 @@ export default function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+          <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
             <Grid item xs={12} sm={7}>
-              <Posts />
+              <Posts currentId={currentId} setCurrentId={setCurrentId}/>
             </Grid>
-            <Grid item xs={12} sm={7}>
-              <Form/>
+            <Grid item xs={12} sm={4}>
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
