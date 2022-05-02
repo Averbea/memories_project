@@ -1,16 +1,18 @@
 import Posts from "../components/Posts/Posts";
 
-export default (state = [], action) => {
+export default (posts_state = [], action) => {
     switch(action.type){
+        case "DELETE":
+            return posts_state.filter(post => post._id !== action.payload) 
         case "UPDATE":
-            return state.map((post) => post._id == action.payload._id? action.payload: post )
+        case "LIKE":
+            return posts_state.map((post) => post._id == action.payload._id? action.payload: post )
         case "FETCH_ALL":
             return action.payload;
-            
         case "CREATE":
-            return [...state, action.payload];
+            return [...posts_state, action.payload];
         default: 
-            return state;
+            return posts_state;
     }
 
 }
