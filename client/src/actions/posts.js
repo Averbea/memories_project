@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as api from '../api';
 
 import { CREATE, DELETE, FETCH_ALL, UPDATE, LIKE } from '../constants/actionTypes';
