@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 import { LOGOUT } from '../../constants/actionTypes';
 
 import memories from '../../images/memories.png';
@@ -14,16 +15,23 @@ export default function Navbar() {
   const location = useLocation();
   const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
 
-  React.useEffect(() => {
-    const token = user?.token;
-    setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [location]);
-
   const logout = () => {
     dispatch({ type: LOGOUT });
     history.push('/');
     setUser(null);
   };
+
+  React.useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  }, [location]);
+
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
