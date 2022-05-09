@@ -10,12 +10,15 @@ import useStyles from './styles';
 import Input from './Input';
 import Icon from './Icon';
 
+import { signIn, signUp } from '../../actions/auth';
+
+const initialFormData = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
+
 export default function Auth() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState(false);
-
   const [isSignup, setIsSignup] = React.useState(false);
-
+  const [formData, setFormData] = React.useState(initialFormData);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -23,11 +26,20 @@ export default function Auth() {
     setShowPassword((prev) => !prev);
   };
 
-  const handleChange = () => {
+  const handleChange = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
     // TODO
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
     // TODO
+    if (isSignup) {
+      dispatch(signUp(formData, history));
+    } else {
+      dispatch(signIn(formData, history));
+    }
   };
 
   const switchMode = () => {
