@@ -11,7 +11,7 @@ import Form from '../Form/Form';
 import useStyles from './styles';
 
 function useQuery() {
-  return new URLSearchParams(useLocation.search);
+  return new URLSearchParams(useLocation().search);
 }
 
 export default function Home() {
@@ -26,10 +26,6 @@ export default function Home() {
 
   const [search, setSearch] = React.useState('');
   const [tags, setTags] = React.useState([]);
-
-  React.useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
 
   function searchPost() {
     if (search.trim() || tags.length > 0) {
@@ -89,7 +85,7 @@ export default function Home() {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper className={classes.pagination} elevation={6}>
-              <Paginate />
+              <Paginate page={page} />
             </Paper>
           </Grid>
         </Grid>

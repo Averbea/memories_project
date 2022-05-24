@@ -9,9 +9,17 @@ export default (postsState = [], action) => {
     case LIKE:
       return postsState.map((post) => (post._id === action.payload._id ? action.payload : post));
     case FETCH_ALL:
-      return action.payload;
+      return {
+        ...postsState,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
+      };
     case FETCH_BY_SEARCH:
-      return action.payload;
+      return {
+        ...postsState,
+        posts: action.payload,
+      };
     case CREATE:
       return [...postsState, action.payload];
     default:
