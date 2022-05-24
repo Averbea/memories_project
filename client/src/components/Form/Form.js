@@ -7,7 +7,7 @@ import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 export default function Form({ currentId, setCurrentId }) {
-  const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
+  const post = useSelector((state) => (currentId ? state.posts.posts.find((p) => p._id === currentId) : null));
   const [postData, setPostData] = React.useState({
     title: '',
     message: '',
@@ -58,7 +58,7 @@ export default function Form({ currentId, setCurrentId }) {
   const heading = currentId ? 'Editing a Memory' : 'Create a Memory';
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h6">{heading}</Typography>
         <TextField name="titles" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />

@@ -52,7 +52,6 @@ export default function Home() {
     setTags(tags.filter((tag) => tag !== tagToDelete));
   }
 
-
   return (
     <Grow in>
       <Container maxWidth="xl">
@@ -84,9 +83,11 @@ export default function Home() {
               </Button>
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper className={classes.pagination} elevation={6}>
-              <Paginate page={page} />
-            </Paper>
+            {(!searchQuery && !tags.length) && (
+              <Paper className={classes.pagination} elevation={6}>
+                <Paginate page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>
