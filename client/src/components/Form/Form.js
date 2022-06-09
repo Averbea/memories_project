@@ -1,12 +1,14 @@
 import React from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
-
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
 import { createPost, updatePost } from '../../actions/posts';
 
 export default function Form({ currentId, setCurrentId }) {
+  const history = useHistory();
+
   const post = useSelector((state) => (currentId ? state.posts.posts.find((p) => p._id === currentId) : null));
   const [postData, setPostData] = React.useState({
     title: '',
@@ -24,13 +26,23 @@ export default function Form({ currentId, setCurrentId }) {
     if (post) setPostData(post);
   }, [post]);
 
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      title: '',
+      message: '',
+      tags: '',
+      selectedFile: '',
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
     }
     clear();
   };
@@ -45,15 +57,6 @@ export default function Form({ currentId, setCurrentId }) {
       </Paper>
     );
   }
-  const clear = () => {
-    setCurrentId(null);
-    setPostData({
-      title: '',
-      message: '',
-      tags: '',
-      selectedFile: '',
-    });
-  };
 
   const heading = currentId ? 'Editing a Memory' : 'Create a Memory';
 
