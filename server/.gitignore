@@ -1,4 +1,5 @@
 .env
+/database
 
 # dependencies
 /node_modules
