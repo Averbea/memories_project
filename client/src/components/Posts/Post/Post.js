@@ -64,7 +64,7 @@ export default function Post({ post, setCurrentId }) {
         </Button>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator)
             && (
-            <Button size="small" color="primary" onClick={() => { dispatch(deletePost(post._id)); }}>
+            <Button size="small" color="primary" onClick={() => { dispatch(deletePost(post._id)); history.go(0); }}>
               <DeleteIcon fontSize="small" />&nbsp;Delete
             </Button>
             )}
