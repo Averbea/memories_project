@@ -1,5 +1,5 @@
 
-# <img src="client%5Csrc%5Cimages%5CmemoriesLogo.png" Height="100"/> <img src="client%5Csrc%5Cimages%5CmemoriesText.png" Height="100"/>
+# <img src="./client/src/images/memoriesLogo.png" Height="100"/> <img src="./client/src/images/memoriesText.png" Height="100"/>
 
 This is a Full Stack MERN Social Media App created for learning purposes. 
 It provides authentication via Email and Google.
