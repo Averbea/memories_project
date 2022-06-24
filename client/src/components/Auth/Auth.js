@@ -29,12 +29,10 @@ export default function Auth() {
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // TODO
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // TODO
+    // console.log(formData);
     if (isSignup) {
       dispatch(signUp(formData, history));
     } else {
