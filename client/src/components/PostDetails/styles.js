@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { relativeTimeRounding } from 'moment';
 
 export default makeStyles((theme) => ({
   media: {
@@ -19,6 +20,7 @@ export default makeStyles((theme) => ({
   section: {
     borderRadius: '20px',
     margin: '10px',
+    padding: '20px',
     flex: 1,
   },
   imageSection: {
@@ -40,8 +42,14 @@ export default makeStyles((theme) => ({
     display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', borderRadius: '15px', height: '39vh',
   },
   commentsOuterContainer: {
-    display: 'flex', justifyContent: 'space-between',
+    display: 'flex',
+    // margin: '20px',
+    // // justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+      flexDirection: 'column',
+    },
   },
   commentsInnerContainer: {
-    height: '200px', overflowY: 'auto', marginRight: '30px' },
+    height: '250px', overflowY: 'auto', marginRight: '30px', width: '100%' },
 }));

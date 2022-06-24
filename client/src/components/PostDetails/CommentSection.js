@@ -26,19 +26,21 @@ export default function CommentSection({ post }) {
 
   return (
     <div className={classes.commentsOuterContainer}>
-      <div className={classes.commentsInnerContainer}>
+      <div style={{ width: '100%', marginRight:'10px'}}>
         <Typography gutterBottom variant="h6">Comments</Typography>
-        {
-          comments.map((c, i) => (
-            <Typography key={i} gutterBottom variant="subtitle1">
-              <strong>{c.split(': ')[0]}</strong> {c.split(': ')[1]}
-            </Typography>
-          ))
-        }
-        <div ref={commentsRef} />
+        <div className={classes.commentsInnerContainer}> 
+          {
+            comments.length > 0 ? comments.map((c, i) => (
+              <Typography key={i} gutterBottom variant="subtitle1">
+                <strong>{c.split(': ')[0]}</strong> {c.split(': ')[1]}
+              </Typography>
+            )) : <Typography variant="body2"> It's empty here....</Typography>
+          }
+          <div ref={commentsRef} />
+        </div>
       </div>
       {user?.result?.name && (
-        <div style={{ width: '70%' }}>
+        <div style={{ width:'100%' }}>
           <Typography gutterBottom variant="h6">Write a Comment</Typography>
           <TextField
             fullWidth
